@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.router1 = void 0;
+var Router1 = require("express");
+exports.router1 = new Router1();
+var router3 = new Router1();
+var couplecont_1 = require("./controllers/couplecont");
+var cc = new couplecont_1.CoupleController;
+router3.post('/', cc.create);
+router3.get('/', cc.getAll);
+router3.delete('/', cc.delete);
+router3.get('/:word', cc.getOne);
+exports.router1.use('/couple', router3);
+module.exports = exports.router1;

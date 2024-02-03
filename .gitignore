@@ -4,3 +4,4 @@ package-lock.json
 /views/img
 /views/form.js
 /node_modules
+.env

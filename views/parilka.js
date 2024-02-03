@@ -5,30 +5,18 @@ const inp1 = document.querySelector('.input1');
 const inp2 = document.querySelector('.input2');
 const footer = document.querySelector('footer')
 
-const forms = (list) =>{
-    const form = document.querySelector('form')
-    const postData = async (url,data) => {
-        let res = await fetch(url,{
-            method: "POST",
-            body: JSON.stringify(data)
-        });
-        return await res.text();
-    };
-    if(form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            postData('http://localhost:3000/lib', list)
-                .then(res => {
-                    console.log(res)
-                })
-                .catch(() => console.log('error'))
-        })
-    }
 
 
 
-}
 
+const postData = async (url,data) => {
+    console.log(JSON.stringify(data))
+    let res = await fetch(url,{
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+    return await res.text();
+};
 
 
 let list = {};
@@ -45,11 +33,30 @@ inp2.addEventListener('keypress',(e) => {
     }
 })
 let flag = true;
+let cnt = 0
 btn.addEventListener("click", function() {
     const word1 = inp1.value;
     const word2 = inp2.value;
+    inp1.value = '';
+    inp2.value = '';
     if((word1 != '') && (word2 != '')) {
-        list[word1] =word2
+        cnt++
+        const ohMyGod = {
+            first: word1,
+            second: word2
+        }
+        console.log(JSON.stringify(ohMyGod))
+        fetch("http://localhost:3000/api/couple",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(ohMyGod)
+        }).then(function(response) {
+            return response.text();
+        }).then((res) =>{
+            return res
+        })
         but.insertAdjacentHTML("afterend", `<div align="center" class="sup"><p class="huita"> ${word1}</p> <p class="huita">${word2}</p></div>`)
         if(flag){
             footer.insertAdjacentHTML('beforebegin',`
@@ -57,7 +64,7 @@ btn.addEventListener("click", function() {
             <div class="inp3">
                 <form action="/lib">
                     <button class = 'ok1' type="submit">OK!</button>
-                </form>>
+                </form>
             </div>
         </div>`)
             flag=false
@@ -68,4 +75,3 @@ btn.addEventListener("click", function() {
     }
 })
 
-forms(list)

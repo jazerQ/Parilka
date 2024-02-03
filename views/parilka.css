@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+p{
+    text-align: center;
+}
 h1{
     margin-top: 10px;
     margin-left: 10px;
@@ -211,4 +214,17 @@ h3 {
 .footer-bottom span{
     opacity: .7;
     font-weight: 400;
+}
+.osnova {
+    display: inline-block;
+    text-align: center;
+    padding-top: 5vw;
+    padding-bottom: 20vw;
+    margin: 10px;
+    height: 160px;
+    width: 170px;
+}
+.main {
+    align-items: center;
+    text-align: center;
 }

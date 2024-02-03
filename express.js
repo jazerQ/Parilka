@@ -1,10 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require('dotenv').config();
 var express = require('express');
 var app = express();
 var path = require('path');
+var bodyParser = require('body-parser');
+var cors = require('cors');
+var router = require("./routes/reg");
+var client_1 = require("@prisma/client");
+var prisma = new client_1.PrismaClient();
 app.use(express.static(path.resolve(__dirname, 'views')));
-var port = 3000;
+app.use(cors());
+app.use(express.json());
+app.use('/api', router);
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+// parse application/json
+app.use(bodyParser.json());
+var port = process.env.PORT || 3000;
 app.get('/', function (req, res) {
-    res.render('index', function (err) {
+    res.sendFile('index', function (err) {
         if (err) {
             console.log(err);
         }
@@ -13,15 +29,12 @@ app.get('/', function (req, res) {
 // app.post('/lib', (req, res) => {
 //     res.json(req)
 // })
-// app.get('/lib', (req, res) => {
-//     res.json(req)
-// })
-app.route('/lib')
-    .get(function (req, res) {
-    res.send('jcioj');
-})
-    .post(function (req, res) {
-    res.send(req.body);
+app.get('/lib', function (req, res) {
+    res.sendFile('C:\\Users\\Jazer\\Desktop\\parilka\\pages\\express\\views\\index1.html', function (err) {
+        if (err) {
+            console.log(err);
+        }
+    });
 });
 app.post('/quiz', function (req, res) {
     res.render('index', function (err) {
