@@ -15,8 +15,6 @@ app.use('/api', router)
 app.use(bodyParser.urlencoded({
     extended: true
   }));
-
-// parse application/json
 app.use(bodyParser.json())
 const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
@@ -26,18 +24,8 @@ app.get('/', (req, res) => {
         }
     })
   })
-// app.post('/lib', (req, res) => {
-//     res.json(req)
-// })
 app.get('/lib', (req, res) => {
     res.sendFile('C:\\Users\\Jazer\\Desktop\\parilka\\pages\\express\\views\\index1.html', (err) =>{
-        if(err){
-            console.log(err)
-        }
-    })
-})
-app.post('/quiz', (req, res) => {
-    res.render('index', (err) => {
         if(err){
             console.log(err)
         }

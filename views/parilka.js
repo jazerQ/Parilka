@@ -7,19 +7,6 @@ const footer = document.querySelector('footer')
 
 
 
-
-
-const postData = async (url,data) => {
-    console.log(JSON.stringify(data))
-    let res = await fetch(url,{
-        method: "POST",
-        body: JSON.stringify(data)
-    });
-    return await res.text();
-};
-
-
-let list = {};
 inp1.addEventListener('keypress',(e) => {
     let key = e.which || e.keyCode
     if(key === 13) {
@@ -33,25 +20,22 @@ inp2.addEventListener('keypress',(e) => {
     }
 })
 let flag = true;
-let cnt = 0
 btn.addEventListener("click", function() {
     const word1 = inp1.value;
     const word2 = inp2.value;
     inp1.value = '';
     inp2.value = '';
     if((word1 != '') && (word2 != '')) {
-        cnt++
-        const ohMyGod = {
+        const pairOfWords = {
             first: word1,
             second: word2
         }
-        console.log(JSON.stringify(ohMyGod))
         fetch("http://localhost:3000/api/couple",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(ohMyGod)
+            body: JSON.stringify(pairOfWords)
         }).then(function(response) {
             return response.text();
         }).then((res) =>{
